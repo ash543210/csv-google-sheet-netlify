@@ -1,6 +1,7 @@
 let express = require("express");
 let cors = require("cors");
 let bodyParser = require("body-parser");
+const serverless = require("serverless-http");
 
 let app = express();
 app.use(cors());
@@ -41,6 +42,11 @@ app.post("/", (req, res) => {
   console.log(data[0]);
   //   for (let i = 0; i < 10; i++) console.log(req.body.data[i]);
 });
-app.listen(3001, () => {
-  console.log("listening");
-});
+app.use(`/.netlify/functions/api`, router);
+
+module.exports = app;
+module.exports.handler = serverless(app);
+
+// app.listen(3001, () => {
+//   console.log("listening");
+// });

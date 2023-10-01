@@ -4,7 +4,13 @@ let bodyParser = require("body-parser");
 const serverless = require("serverless-http");
 
 let app = express();
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json({ limit: "1024000000mb" }));
 const router = express.Router();
 

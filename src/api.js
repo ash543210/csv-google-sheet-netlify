@@ -6,6 +6,7 @@ const serverless = require("serverless-http");
 let app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: "1024000000mb" }));
+const router = express.Router();
 
 const run = () => {
   let values = [
@@ -37,9 +38,10 @@ const run = () => {
     });
 };
 
-app.post("/", (req, res) => {
+router.post("/", (req, res) => {
   const { data, keys } = req.body;
   console.log(data[0]);
+  res.send("yahoooo!");
   //   for (let i = 0; i < 10; i++) console.log(req.body.data[i]);
 });
 app.use(`/.netlify/functions/api`, router);
